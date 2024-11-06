@@ -242,7 +242,7 @@
         <div id="letter" class="letter">
             <h2 id="l-header">I ❤️ U</h2>
             <div id="message2" class="message">
-                <p id="l-content">Thư tỏ tình: “Tôi đã thích bạn từ rất lâu, trái tim tôi đã lỡ trao cho bạn mất rồi. Bạn có thể nhận không?”</p>
+                <p id="l-content">Thư tỏ tình: “Tôi đã thích bạn từ rất lâu, trái tim tôi đã lỡ trao cho bạn mất rồi.\nBạn có thể nhận không?”</p>
                 <div style="margin-top: 10px;">
                     <button id="l-btnA" onclick="showResponse('accept')">Chấp nhận</button>
                     <button id="l-btnR" onclick="showResponse('refuse')">Từ chối</button>
@@ -300,6 +300,7 @@
             accept = false;
             showBb = true;
             showBubble(50, "💔");
+            document.getElementById("l-header").innerText = "💔";
             document.getElementById("l-content").innerText = "Cảm ơn đã phản hồi\nchúc bạn ngày mới vui vẻ!";
             document.getElementById("l-btnA").innerText = "Refresh";
             document.getElementById("l-btnA").setAttribute("onclick", "location.reload()");
