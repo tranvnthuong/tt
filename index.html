@@ -278,14 +278,20 @@
     var warn = true;
     var showBb = false;
     var accept = true;
+    const storedData = JSON.parse(localStorage.getItem('thoiGianDongY❤️'));
     document.getElementById("letter").addEventListener('click', () => {
         const backupContent = document.getElementById("l-content").innerText;
-        if (warn) {
+        if (warn && !storedData) {
             warn = false;
             document.getElementById("l-content").innerText = "Lá thư này có thể có một chút \"sức nặng\" hoặc không!\nBạn muốn đọc tiếp chứ?";
             document.getElementById("l-btnA").innerText = "Đọc tiếp";
             document.getElementById("l-btnA").setAttribute("onclick", `showResponse("continue", "${backupContent}")`);
             document.getElementById("l-btnR").innerText = "Không đọc nữa";
+        } else if (warn && storedData) {
+            document.getElementById("l-content").innerText = backupContent.replace('\\n', "\n");
+            document.getElementById("l-btnA").innerText = "Đã đồng ý❤️";
+            document.getElementById("l-btnA").setAttribute("onclick", "showResponse('agreed')");
+            document.getElementById("l-btnR").style.display = "none";
         }
         if (showBb) {
             if (accept) {
@@ -336,17 +342,34 @@
             document.getElementById("l-btnA").innerText = "Refresh";
             document.getElementById("l-btnA").setAttribute("onclick", "location.reload()");
             document.getElementById("l-btnR").style.display = "none";
-        } else if (action == "accept") {
+        } else if (action == "accept" || action == "agreed") {
             accept = true;
             showBb = true;
             showBubble(50, "❤️");
+            var hour, weekday, day, month, year;
             const date = new Date();
             const options = { timeZone: 'Asia/Ho_Chi_Minh', hour12: false };
-            const hour = new Intl.DateTimeFormat('vi-VN', { ...options, hour: 'numeric', minute: 'numeric', second: 'numeric' }).format(date);
-            const weekday = new Intl.DateTimeFormat('vi-VN', { ...options, weekday: 'long' }).format(date);
-            const day = new Intl.DateTimeFormat('vi-VN', { ...options, day: 'numeric' }).format(date);
-            const month = new Intl.DateTimeFormat('vi-VN', { ...options, month: 'long' }).format(date);
-            const year = new Intl.DateTimeFormat('vi-VN', { ...options, year: 'numeric' }).format(date);
+            if (storedData) {
+                hour = storedData.hour;
+                weekday = storedData.weekday;
+                day = storedData.day;
+                month = storedData.month;
+                year = storedData.year;
+            } else {
+                hour = new Intl.DateTimeFormat('vi-VN', { ...options, hour: 'numeric', minute: 'numeric', second: 'numeric' }).format(date);
+                weekday = new Intl.DateTimeFormat('vi-VN', { ...options, weekday: 'long' }).format(date);
+                day = new Intl.DateTimeFormat('vi-VN', { ...options, day: 'numeric' }).format(date);
+                month = new Intl.DateTimeFormat('vi-VN', { ...options, month: 'long' }).format(date);
+                year = new Intl.DateTimeFormat('vi-VN', { ...options, year: 'numeric' }).format(date);
+                let dateTimeData = {
+                    hour,
+                    weekday,
+                    day,
+                    month,
+                    year
+                };
+                localStorage.setItem('thoiGianDongY❤️', JSON.stringify(dateTimeData));
+            }
             const ther = [
                 `Giữa giờ ${hour}, lòng sao bối rối,\n${weekday} về, nắng gọi mưa bay.\nNgày ${day}, ${month} mê say,\nNăm ${year} đến, lòng thành câu hát.\nBao nhiêu thời gian trôi qua thầm lặng,\nChỉ hôm nay, mọi thứ bỗng nên thơ.\nKhoảnh khắc đẹp như một giấc mơ,\nNgày này, giờ này, ta hẹn thề mãi mãi.`,
                 `Giờ ${hour} đến nhẹ nhàng, khẽ khàng,\n${weekday} gọi lòng ta thênh thang.\nNgày ${day}, ${month} miên man,\nNăm ${year}, lời yêu vừa trọn vẹn.`,
