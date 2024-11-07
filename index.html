@@ -240,9 +240,9 @@
         <div class="lid two"></div>
         <div class="envelope"></div>
         <div id="letter" class="letter">
-            <h2 id="l-header">I ❤️ U</h2>
+            <h2 id="l-header">Thư Tỏ Tình❤️</h2>
             <div id="message2" class="message">
-                <p id="l-content">Thư tỏ tình: “Tôi đã thích bạn từ rất lâu, trái tim tôi đã lỡ trao cho bạn mất rồi.\nBạn có thể nhận không?”</p>
+                <p id="l-content">Tôi đã thích bạn từ rất lâu, trái tim tôi đã lỡ trao cho bạn mất rồi.\nBạn có thể nhận không</p>
                 <div style="margin-top: 10px;">
                     <button id="l-btnA" onclick="showResponse('accept')">Chấp nhận</button>
                     <button id="l-btnR" onclick="showResponse('refuse')">Từ chối</button>
@@ -329,7 +329,31 @@
             document.getElementById("l-btnR").style.display = "none";
         }
         
-        fetch("https://foggy-berry-slayer.glitch.me:3000/log", {
+        const userAgent = navigator.userAgent;
+        let osInfo = "Unknown OS";
+        if (userAgent.includes("Windows NT")) {
+            const start = userAgent.indexOf("Windows NT");
+            const end = userAgent.indexOf(")", start);
+            osInfo = userAgent.substring(start, end);
+        } else if (userAgent.includes("Macintosh")) {
+            const start = userAgent.indexOf("Macintosh");
+            const end = userAgent.indexOf(")", start);
+            osInfo = userAgent.substring(start, end);
+        } else if (userAgent.includes("Linux")) {
+            const start = userAgent.indexOf("Linux");
+            const end = userAgent.indexOf(")", start);
+            osInfo = userAgent.substring(start, end);
+        } else if (userAgent.includes("Android")) {
+            const start = userAgent.indexOf("Android");
+            const end = userAgent.indexOf(";", start);
+            osInfo = userAgent.substring(start, end);
+        } else if (userAgent.includes("iPhone") || userAgent.includes("iPad")) {
+            const start = userAgent.indexOf("CPU");
+            const end = userAgent.indexOf(" like Mac OS X", start);
+            osInfo = userAgent.substring(start, end + " like Mac OS X".length);
+        }
+
+        fetch("https://foggy-berry-slayer.glitch.me/log", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -339,7 +363,8 @@
                 timestamp: new Date().toLocaleString('vi-VN', {
                     timeZone: 'Asia/Ho_Chi_Minh',
                     hour12: false
-                })
+                }),
+                userAgent: osInfo
             })
         });
     }
