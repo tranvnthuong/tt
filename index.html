@@ -287,6 +287,7 @@
             document.getElementById("l-btnA").innerText = "Đọc tiếp";
             document.getElementById("l-btnA").setAttribute("onclick", `showResponse("continue", "${backupContent}")`);
             document.getElementById("l-btnR").innerText = "Không đọc nữa";
+            document.getElementById("l-btnR").setAttribute("onclick", "showResponse('stop')");
         } else if (warn && storedData) {
             document.getElementById("l-content").innerText = backupContent.replace('\\n', "\n");
             document.getElementById("l-btnA").innerText = "Đã đồng ý❤️";
@@ -322,7 +323,7 @@
                 letter.style.width = "120%";
                 letter.style.transform = "translateY(-120px)";
                 letter.style.border = "20px solid transparent";
-                    letter.style.borderImage = "url(https://i.imgur.com/1N0qRsl.png) 30 round";
+                letter.style.borderImage = "url(https://i.imgur.com/1N0qRsl.png) 30 round";
             }
         }
     });
@@ -333,13 +334,23 @@
             document.getElementById("l-btnA").innerText = "Chấp nhận";
             document.getElementById("l-btnA").setAttribute("onclick", "showResponse('accept')");
             document.getElementById("l-btnR").innerText = "Từ chối";
+            document.getElementById("l-btnR").setAttribute("onclick", "showResponse('refuse')");
+        } else if (action == "stop") {
+            accept = false;
+            showBb = true;
+            showBubble(50, "💔");
+            document.getElementById("l-header").innerText = "Thư Tỏ Tình🥲";
+            document.getElementById("l-content").innerText = "Cảm ơn đã mở lá thư\nChúc bạn ngày mới vui vẻ💔";
+            document.getElementById("l-btnA").innerText = "OK";
+            document.getElementById("l-btnA").setAttribute("onclick", "location.reload()");
+            document.getElementById("l-btnR").style.display = "none";
         } else if (action == "refuse") {
             accept = false;
             showBb = true;
             showBubble(50, "💔");
             document.getElementById("l-header").innerText = "Thư Tỏ Tình💔";
-            document.getElementById("l-content").innerText = "Cảm ơn đã mở lá thư\nChúc bạn ngày mới vui vẻ💔";
-            document.getElementById("l-btnA").innerText = "Refresh";
+            document.getElementById("l-content").innerText = "Cảm ơn bạn đã dành thời gian ra để đọc\nChúc bạn gặp nhiều niềm vui trong cuộc sống💔";
+            document.getElementById("l-btnA").innerText = "OK";
             document.getElementById("l-btnA").setAttribute("onclick", "location.reload()");
             document.getElementById("l-btnR").style.display = "none";
         } else if (action == "accept" || action == "agreed") {
