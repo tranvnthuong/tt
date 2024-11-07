@@ -109,9 +109,17 @@
         }
 
         .message button {
+            font-family: "Dancing Script", cursive;
             background-color: #fdfdfd;
-            border: 1px solid rgba(0, 0, 0, 0.3);
+            border: none;
+            outline: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
             cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .message button:hover {
+            font-weight: bolder;
         }
 
         .wrapper:hover .lid.one {
@@ -241,8 +249,8 @@
         <div class="envelope"></div>
         <div id="letter" class="letter">
             <h2 id="l-header">Thư Tỏ Tình❤️</h2>
-            <div id="message2" class="message">
-                <p id="l-content">Tôi đã thích bạn từ rất lâu, trái tim tôi đã lỡ trao cho bạn mất rồi.\nBạn có thể nhận không</p>
+            <div class="message">
+                <p id="l-content">Tôi đã thích bạn từ rất lâu, trái tim tôi đã lỡ trao cho bạn mất rồi.\nBạn có thể nhận không?Tôi đã thích bạn từ rất lâu, trái tim tôi đã lỡ trao cho bạn mất rồi.\nBạn có thể nhận không?Tôi đã thích bạn từ rất lâu, trái tim tôi đã lỡ trao cho bạn mất rồi.\nBạn có thể nhận không?Tôi đã thích bạn từ rất lâu, trái tim tôi đã lỡ trao cho bạn mất rồi.\nBạn có thể nhận không?</p>
                 <div style="margin-top: 10px;">
                     <button id="l-btnA" onclick="showResponse('accept')">Chấp nhận</button>
                     <button id="l-btnR" onclick="showResponse('refuse')">Từ chối</button>
@@ -261,10 +269,10 @@
         this.classList.add('hover');
     });
 
+    var openLetter = true;
     document.getElementById("wrapper").addEventListener('mouseleave', () => {
-        document.getElementById("letter").style.transform = "auto";
-        document.getElementById("letter").style.height = "80%";
-        document.getElementById("letter").style.zIndex = "2";
+        document.getElementById("letter").removeAttribute("style");
+        openLetter = true;
     });
 
     var warn = true;
@@ -286,8 +294,33 @@
                 showBubble(Math.floor(Math.random() * 50) + 1, "💔");
             }
         }
-        document.getElementById("letter").style.height = "auto";
-        document.getElementById("letter").style.zIndex = "4";
+        let letter = document.getElementById("letter"); 
+        if (openLetter) {
+            letter.style.transform = "translateY(-250px)";
+            setTimeout(function() {
+                letter.style.transform = "translateY(-50px)";
+                openLetter = false;
+                letter.style.height = "auto";
+                letter.style.zIndex = "4";
+                if (letter.offsetHeight > 340) {
+                    console.log("true");
+                    letter.style.width = "120%";
+                    letter.style.transform = "translateY(-120px)";
+                    letter.style.border = "10px solid transparent";
+                    letter.style.borderImage = "url(https://i.imgur.com/1N0qRsl.png) 30 round";
+                }
+            }, 1000)
+        } else {
+            letter.style.height = "auto";
+            letter.style.zIndex = "4";
+            if (letter.offsetHeight > 340) {
+                console.log("true");
+                letter.style.width = "120%";
+                letter.style.transform = "translateY(-120px)";
+                letter.style.border = "10px solid transparent";
+                    letter.style.borderImage = "url(https://i.imgur.com/1N0qRsl.png) 30 round";
+            }
+        }
     });
 
     function showResponse(action, content = "") {
@@ -300,8 +333,8 @@
             accept = false;
             showBb = true;
             showBubble(50, "💔");
-            document.getElementById("l-header").innerText = "💔";
-            document.getElementById("l-content").innerText = "Cảm ơn đã phản hồi\nchúc bạn ngày mới vui vẻ!";
+            document.getElementById("l-header").innerText = "Thư Tỏ Tình💔";
+            document.getElementById("l-content").innerText = "Cảm ơn đã mở lá thư\nChúc bạn ngày mới vui vẻ💔";
             document.getElementById("l-btnA").innerText = "Refresh";
             document.getElementById("l-btnA").setAttribute("onclick", "location.reload()");
             document.getElementById("l-btnR").style.display = "none";
