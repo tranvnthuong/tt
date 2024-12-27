@@ -1,0 +1,50 @@
+<!------------------------------------------------------
+               Trang web của thượng
+   Deployment: https://tranvnthuong.github.io/tt
+ Bấm Ctrl + Click chuột trái vào link để xem Bản DEMO
+-------------------------------------------------------->
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Trang web đặc biệt</title>
+    <link href="./style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div id="wrapper" class="wrapper">
+      <div class="lid one"></div>
+      <div class="lid two"></div>
+      <div class="envelope"></div>
+      <div id="letter" class="letter">
+        <h2 id="l-header"></h2>
+        <div class="message">
+          <p id="l-content"></p>
+          <div style="margin-top: 10px">
+            <button id="l-btnR" onclick="showResponse('refuse')"></button>
+            <button id="l-btnA" onclick="showResponse('accept')"></button>
+          </div>
+        </div>
+      </div>
+      <p class="from"></p>
+      <div class="heart">
+        <img alt="heart" src="./heart.png" />
+      </div>
+      <div class="rose">
+        <img alt="rose" src="./flower.png" />
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
