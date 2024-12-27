@@ -259,20 +259,22 @@ function showResponse(action) {
     osInfo = userAgent.substring(start, end + " like Mac OS X".length);
   }
 
-  fetch("https://foggy-berry-slayer.glitch.me/log", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      action: action,
-      timestamp: new Date().toLocaleString("vi-VN", {
-        timeZone: "Asia/Ho_Chi_Minh",
-        hour12: false,
+  if (action !== "agreed") {
+    fetch("https://foggy-berry-slayer.glitch.me/log", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        action: action,
+        timestamp: new Date().toLocaleString("vi-VN", {
+          timeZone: "Asia/Ho_Chi_Minh",
+          hour12: false,
+        }),
+        userAgent: osInfo,
       }),
-      userAgent: osInfo,
-    }),
-  });
+    });
+  }
 }
 
 function createHeartBurst(x, y) {
