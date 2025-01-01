@@ -49,7 +49,7 @@ const firstContent =
   'Lá thư này có thể có một chút "sức nặng" hoặc không!\nBạn muốn đọc tiếp chứ?';
 const originalTitle = "Lá thư❤️";
 const originalContent =
-  "Tôi đã thích bạn từ rất lâu, trái tim tôi đã lỡ trao cho bạn mất rồi.\nBạn có thể nhận không ♡";
+  "Tôi đã thích bạn từ rất lâu, trái tim tôi đã lỡ trao cho bạn mất rồi.\nLam ny t nhe ♡";
 const storedData = JSON.parse(localStorage.getItem("thoiGianDongY❤️"));
 
 document.getElementById("letter").addEventListener("click", () => {
